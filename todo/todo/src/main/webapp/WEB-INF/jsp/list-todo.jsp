@@ -5,10 +5,10 @@
 </head>
 
 <body>
-	Here are the list of your todo:
+	Here are the list of ${name}'s todos:
 	${todos} 
 	<BR/>
-	Your Name is : ${name}
+	click here to <a href="/add-todo">Add Todo</a>
 </body>
 
 </html>
