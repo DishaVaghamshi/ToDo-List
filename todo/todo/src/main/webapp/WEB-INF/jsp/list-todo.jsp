@@ -27,7 +27,7 @@
 			<td>${todo.desc}</td>
 			<td>${todo.targetDate} </td>
 			<td>${todo.done} </td>
-			<th><a type="button" class="btn btn-warning" href="/delete-todo">delete ${todo.id}</a></th>
+			<th><a type="button" class="btn btn-warning" href="/delete-todo?id=${todo.id}">delete </a></th>
 		</tr>
 		</c:forEach>
 		
