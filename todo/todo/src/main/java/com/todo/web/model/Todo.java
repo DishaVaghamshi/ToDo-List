@@ -2,12 +2,21 @@ package com.todo.web.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class Todo {
     private int id;
     private String user;
+    
+    @Size(min=10, message="Enter atleast 10 char")
     private String desc;
     private Date targetDate;
     private boolean isDone;
+    
+    public Todo()
+    {
+    	super();
+    }
 
     public Todo(int id, String user, String desc, Date targetDate,
             boolean isDone) {
