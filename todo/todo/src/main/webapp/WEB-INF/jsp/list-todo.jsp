@@ -3,34 +3,43 @@
 
 <head>
 <title>Todo's for ${name}</title>
+<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	    		rel="stylesheet">
 </head>
 
 <body>
-<h3>Your ToDos</h3>
-	<table>
+<div class="container">
+
+	<table class="table table-striped">
 		<caption>Your ToDos are: </caption>
 		<thead>
 			<tr>
 				<th>Description</th>
 				<th>Target Date</th>
 				<th>Is it done?</th>
+				<th>delete</th>
 			</tr>
 		</thead>
 		<tbody>
-		JSTL For Loop
+		
 		<c:forEach items ="${todos}" var="todo">
 		<tr>
 			<td>${todo.desc}</td>
 			<td>${todo.targetDate} </td>
 			<td>${todo.done} </td>
+			<th><a type="button" class="btn btn-warning" href="/delete-todo">delete ${todo.id}</a></th>
 		</tr>
 		</c:forEach>
 		
 		</tbody>
 	</table>
-	<BR/>
-	<BR/>
-	click here to <a href="/add-todo">Add Todo</a>
+	
+	<div><a class="button" href="/add-todo">Add a Todo</a></div>
+	
+	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	</div>   
 </body>
 
 </html>
