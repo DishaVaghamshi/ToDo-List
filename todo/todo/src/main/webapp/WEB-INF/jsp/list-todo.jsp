@@ -1,13 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 
-<head>
-<title>Todo's for ${name}</title>
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	    		rel="stylesheet">
-</head>
-
-<body>
 <div class="container">
 
 	<table class="table table-striped">
@@ -26,7 +21,7 @@
 		<c:forEach items ="${todos}" var="todo">
 		<tr>
 			<td>${todo.desc}</td>
-			<td>${todo.targetDate} </td>
+			<td><fmt:formatDate value="${todo.targetDate}" pattern="dd/MM/yyyy"></fmt:formatDate>  </td>
 			<td>${todo.done} </td>
 			<th><a type="button" class="btn btn-success" href="/update-todo?id=${todo.id}">update </a></th>
 			<th><a type="button" class="btn btn-warning" href="/delete-todo?id=${todo.id}">delete </a></th>
@@ -39,10 +34,6 @@
 	
 	<div><a class="button" href="/add-todo">Add a Todo</a></div>
 	
-	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-	<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<%@ include file="common/footer.jspf" %>
 	
-	</div>   
-</body>
-
-</html>
+	

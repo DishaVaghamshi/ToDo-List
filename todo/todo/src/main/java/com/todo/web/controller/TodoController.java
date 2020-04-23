@@ -5,13 +5,18 @@ import java.util.Date;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import java.text.SimpleDateFormat;
+
 
 import com.todo.web.model.Todo;
 import com.todo.web.service.TodoService;
@@ -22,7 +27,13 @@ public class TodoController {
 
 	@Autowired
 	TodoService service;
-
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
+		}
 	@RequestMapping(value = "/list-todo", method = RequestMethod.GET)
 	public String showTodos(ModelMap model) {
 		String name = (String) model.get("name");
@@ -71,7 +82,7 @@ public class TodoController {
 			return "todo";
 		}
 
-		service.addTodo((String) model.get("name"), todo.getDesc(), new Date(),
+		service.addTodo((String) model.get("name"), todo.getDesc(), todo.getTargetDate(),
 				false);
 		return "redirect:/list-todo";
 	}
