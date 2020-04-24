@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -40,9 +42,15 @@ public class TodoController {
 		model.put("todos", service.retrieveTodos(name));
 		return "list-todo";
 	}
-	private String getLoggedInUserName(ModelMap model) {
-		return (String) model.get("name");
-	}
+		private String getLoggedInUserName(ModelMap model) {
+			Object principal = SecurityContextHolder.getContext()
+					.getAuthentication().getPrincipal();
+
+			if (principal instanceof UserDetails)
+				return ((UserDetails) principal).getUsername();
+
+			return principal.toString();
+		}
 
 	@RequestMapping(value = "/add-todo", method = RequestMethod.GET)
 	public String showAddTodoPage(ModelMap model) {
